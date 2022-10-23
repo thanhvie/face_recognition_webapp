@@ -1,5 +1,6 @@
 from flask import render_template, request
 import os
+import glob
 from PIL import Image
 from app.utils import pipeline_model
 
@@ -11,6 +12,12 @@ def base():
 
 
 def index():
+    upload_files = glob.glob('static/uploads/*')
+    for f in upload_files:
+        os.remove(f)
+    predict_files = glob.glob('static/predict/*')
+    for f in predict_files:
+        os.remove(f)
     return render_template('index.html')
 
 
